@@ -1,6 +1,6 @@
 # Codex Model Bridge
 
-Windows 桌面助手，把 RuiC-oc-ferry 的 OpenCode 免费模型接入 Codex。软件负责准备本地模型服务、检测模型、更新 Codex 配置并备份原配置。
+Windows 桌面助手，把 OpenCode 中可用的免费模型接入 Codex。软件负责准备本地模型服务、检测模型、更新 Codex 配置并备份原配置。
 
 ## 快速开始
 
