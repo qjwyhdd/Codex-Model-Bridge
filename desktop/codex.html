@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <title>Codex Model Bridge</title>
+  <link rel="stylesheet" href="codex.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">⇄</span><span>Codex <strong>Model Bridge</strong></span></div>
+      <span class="tag">免费模型连接助手</span>
+    </header>
+
+    <section class="hero" aria-labelledby="heading">
+      <div class="eyebrow">OPENCODE → CODEX</div>
+      <h1 id="heading">让免费模型，<br>成为你的编程搭档。</h1>
+      <p>自动准备，一键接入。无需命令行，无需填写密钥。</p>
+      <div id="service-pill" class="pill preparing" role="status"><span class="dot"></span><span id="service-label">正在准备模型</span></div>
+      <div class="hero-art" aria-hidden="true"><span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span><span class="art-node node-left">OC</span><span class="art-connector">→</span><span class="art-node node-right">&lt;/&gt;</span><span class="art-caption">你的工作台，多一种选择。</span></div>
+    </section>
+
+    <ol class="steps" aria-label="接入步骤">
+      <li id="step-prepare" class="step active"><span class="step-number">1</span><span><b>准备模型</b><small>自动完成</small></span></li>
+      <li id="step-connect" class="step"><span class="step-number">2</span><span><b>接入 Codex</b><small>选择后点击按钮</small></span></li>
+      <li id="step-use" class="step"><span class="step-number">3</span><span><b>重开 Codex</b><small>新建对话，开始使用</small></span></li>
+    </ol>
+
+    <section class="connect-card" aria-labelledby="connect-title">
+      <div class="card-heading"><div><h2 id="connect-title">选择你的模型</h2><p id="model-hint">首次准备需要一点时间，软件会自动下载并检测。</p></div><span class="count" id="model-count">准备中</span></div>
+      <div class="connect-row">
+        <div class="select-wrap"><label for="model-select">默认模型</label><select id="model-select" disabled><option>正在查找可用模型…</option></select></div>
+        <button id="connect" class="button primary" disabled>接入 Codex <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="model-meta" id="model-meta">只显示已通过工具调用检测的免费模型。</div>
+      <div class="attached" id="attached" hidden><span class="success-icon" aria-hidden="true">✓</span><div><b id="attached-title">已接入 Codex</b><p>请完全退出并重开 Codex，再新建对话。</p></div><button id="open-codex" class="button secondary">打开 Codex ↗</button></div>
+      <div class="preparing-note" id="preparing-note"><span class="spinner" aria-hidden="true"></span><span id="preparing-text">正在启动独立模型服务，请保持联网。</span><button id="restart" class="text-button" hidden>重新启动</button></div>
+      <div id="feedback" class="feedback" role="status" hidden></div>
+      <div class="card-footer"><button id="test" class="text-button" disabled>测试连接</button><span class="footer-separator">·</span><button id="probe" class="text-button" disabled>重新检测模型</button><span class="footer-spacer"></span><button id="restore" class="text-button muted" disabled>恢复原配置</button></div>
+    </section>
+
+    <section class="bottom-note"><span class="note-icon" aria-hidden="true">i</span><p>关闭窗口后继续在托盘运行。免费模型可能限流；响应慢时可换一个模型。</p></section>
+
+    <details class="advanced" id="advanced"><summary><span>高级设置与模型状态</span><span class="summary-arrow" aria-hidden="true">⌄</span></summary><div class="advanced-content">
+      <div class="settings-row"><div><b>开机启动</b><p>登录电脑后在后台准备模型。</p></div><label class="switch"><input id="autostart" type="checkbox" aria-label="开机启动"><span></span></label></div>
+      <div class="settings-row"><div><b>使用系统代理</b><p>跟随 Windows 已配置的 HTTP / HTTPS 代理。</p></div><label class="switch"><input id="proxy" type="checkbox" aria-label="使用系统代理"><span></span></label></div>
+      <div class="settings-row"><div><b>思考程度</b><p>设置 Codex 默认推理强度；模型不支持时自动降级。</p></div><select id="reasoning-select" class="settings-select" aria-label="思考程度"><option value="auto">模型默认</option><option value="none">关闭</option><option value="minimal">极低</option><option value="low">低</option><option value="medium">中</option><option value="high">高</option><option value="xhigh">很高</option><option value="max">最大</option></select></div>
+      <div class="details-toolbar"><h3>所有发现的模型</h3><button id="refresh" class="text-button">更新目录</button></div>
+      <div id="model-list" class="model-list"><p class="empty">模型准备好后会显示在这里。</p></div>
+      <dl class="technical"><div><dt>配置文件</dt><dd id="config-path">正在读取…</dd></div><div><dt>本机服务</dt><dd id="endpoint">—</dd></div><div><dt>版本</dt><dd id="version">—</dd></div></dl>
+      <div class="advanced-links"><button id="open-data" class="text-button">打开日志文件夹</button><button id="open-backup" class="text-button">查看配置备份</button></div>
+      <p class="scope-note">当前版本支持基础对话和工具转发。长对话压缩、桌面端完整工作流仍需进一步验证。</p>
+    </div></details>
+    <footer class="app-footer"><span>本机转发 · 自动备份 · 随时恢复</span><span>基于开源 OC Ferry · MIT</span></footer>
+  </main>
+  <script src="codex-renderer.js"></script>
+</body>
+</html>

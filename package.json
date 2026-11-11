@@ -1,0 +1,108 @@
+{
+  "name": "codex-model-bridge",
+  "version": "0.5.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "codex": "node scripts/codex-ferry.mjs run",
+    "codex:serve": "node scripts/codex-ferry.mjs serve",
+    "codex:config": "node scripts/codex-ferry.mjs config",
+    "codex:install": "node scripts/codex-ferry.mjs install",
+    "codex:restore": "node scripts/codex-ferry.mjs restore",
+    "codex:smoke": "node scripts/smoke-codex.mjs",
+    "codex:smoke:responses": "node scripts/smoke-responses.mjs",
+    "test:desktop": "electron scripts/test-codex-desktop.cjs",
+    "test:app": "node scripts/test-packaged-app.mjs",
+    "start": "node src/main.js",
+    "test": "node --test test/*.test.js",
+    "desktop": "electron .",
+    "build:mac": "node scripts/build-mac.mjs && node scripts/build-dmg.mjs && node scripts/verify-mac.mjs",
+    "build:dmg": "node scripts/build-dmg.mjs",
+    "build:win": "node scripts/build-windows.cjs nsis",
+    "build:win:portable": "node scripts/build-windows.cjs portable",
+    "build:win:arm64": "node scripts/build-windows.cjs portable --arm64",
+    "build:linux": "electron-builder --linux AppImage --x64 --publish never"
+  },
+  "dependencies": {
+    "tar": "7.5.22",
+    "undici": "^7.30.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0"
+  },
+  "description": "Codex Model Bridge — OpenCode 免费模型连接助手",
+  "author": "HRuiCcc",
+  "main": "desktop/codex-main.cjs",
+  "build": {
+    "appId": "local.ruic.oc-ferry-codex",
+    "productName": "Codex Model Bridge",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      "LICENSE",
+      "README-CODEX.md",
+      "package.json"
+    ],
+    "asar": false,
+    "artifactName": "Codex-Model-Bridge-${version}-${os}-${arch}.${ext}",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "identity": null,
+      "minimumSystemVersion": "13.0",
+      "hardenedRuntime": false,
+      "notarize": false,
+      "target": "dir"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "desktop/codex-model-bridge.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Codex Model Bridge",
+      "runAfterFinish": true,
+      "installerIcon": "desktop/codex-model-bridge.ico",
+      "uninstallerIcon": "desktop/codex-model-bridge.ico",
+      "installerHeaderIcon": "desktop/codex-model-bridge.ico",
+      "artifactName": "Codex-Model-Bridge-Setup-${version}-win-${arch}.${ext}",
+      "include": "build/codex-installer.nsh"
+    },
+    "portable": {
+      "artifactName": "Codex-Model-Bridge-${version}-win-${arch}-portable.${ext}"
+    },
+    "linux": {
+      "category": "Utility"
+    },
+    "icon": "desktop/codex-model-bridge.ico"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HRuiCcc/RuiC-oc-ferry.git"
+  },
+  "keywords": [
+    "opencode",
+    "workbuddy",
+    "free-models",
+    "openai-compatible",
+    "electron",
+    "tray-app",
+    "llm",
+    "macos",
+    "windows",
+    "dsh",
+    "deepseek-harness"
+  ]
+}
